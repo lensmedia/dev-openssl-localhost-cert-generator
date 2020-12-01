@@ -10,3 +10,31 @@ OpenSSL installation https://wiki.openssl.org/index.php/Binaries, though might b
 2. Run `openssl_generate.bat` as administrator.
 3. Enter (same whatever you like) password thrice.
 4. Profit
+
+## Examples
+
+### Apache
+```
+Listen 9301
+<VirtualHost *:9301>
+    ServerName 192.168.1.250
+    
+    SSLEngine on
+    SSLCertificateFile "D:/Webserver/localhost.cer"
+    SSLCertificateKeyFile "D:/Webserver/localhost.key"
+    
+    ...
+```
+
+### Webpack DevServer
+```
+module.exports = merge(common, {
+    devServer: {
+        https: {
+            key: fs.readFileSync('../../localhost.key'),
+            cert: fs.readFileSync('../../localhost.cer'),
+            ca: fs.readFileSync('../../root.cer')
+        },
+        
+        ...
+```
